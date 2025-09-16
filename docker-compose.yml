@@ -1,0 +1,23 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: explorer-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: explorer_user
+      POSTGRES_PASSWORD: explorer_pass
+      POSTGRES_DB: explorer_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - explorer-postgres-data:/var/lib/postgresql/data
+    networks:
+      - explorer-net
+
+volumes:
+  explorer-postgres-data:
+    external: true
+
+networks:
+  explorer-net:
+    external: true
